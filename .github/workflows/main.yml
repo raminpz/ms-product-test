@@ -16,7 +16,7 @@ jobs:
       - name: Run JMeter Action on a product test
         uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
-          testFilePath: recursos/tests/product_tests.jmx
+          testFilePath: src/main/resources/tests/product_tests.jmx
           outputReportsFolder: reports/
           args: "--loglevel INFO"
 
