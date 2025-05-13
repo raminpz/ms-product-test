@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Create reports directory
+        run: mkdir -p reports
+
       - name: Run JMeter Action on a product test
         uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
@@ -24,7 +27,7 @@ jobs:
       - name: List files in reports directory
         run: ls -l reports/
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v1
         with:
           name: jmeter-test-results
           path: reports/
