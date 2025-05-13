@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copia el archivo JAR desde el directorio target del proyecto a la imagen Docker
-COPY build/libs/ms-product-test-0.0.1-SNAPSHOT.jar ms-product-test.jar
+COPY build/libs/ms-produc-test-0.0.1-SNAPSHOT.jar ms-product-test.jar
 
 # Expón el puerto 8080 en el contenedor
 EXPOSE 8080

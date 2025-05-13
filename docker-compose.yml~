@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_USERNAME=sa
+      - DB_PASSWORD=Ram!123taty1012
+      - DB_URL=jdbc:sqlserver://sqlserver:1433;databaseName=db_test
+    depends_on:
+      - sqlserver
+    networks:
+      - product-api-network
+
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:

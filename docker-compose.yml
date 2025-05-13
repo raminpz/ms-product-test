@@ -27,7 +27,7 @@ services:
     networks:
       - product-api-network
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Ram!123taty1012 -Q 'SELECT 1'"]
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P Ram!123taty1012 -Q 'SELECT 1'"]
       interval: 10s
       timeout: 5s
       retries: 5
