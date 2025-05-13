@@ -5,7 +5,8 @@ on:
     branches:
       - master
   pull_request:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
   action_build:
@@ -16,11 +17,14 @@ jobs:
       - name: Run JMeter Action on a product test
         uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
-          testFilePath: recursos/tests/product_tests.jmx
+          testFilePath: src/main/resources/tests/product_tests.jmx
           outputReportsFolder: reports/
           args: "--loglevel INFO"
 
-      - uses: actions/upload-artifact@v3
+      - name: List files in reports directory
+        run: ls -l reports/
+
+      - uses: actions/upload-artifact@v2
         with:
           name: jmeter-test-results
           path: reports/
