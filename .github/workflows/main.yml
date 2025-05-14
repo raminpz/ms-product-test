@@ -11,18 +11,17 @@ jobs:
   action_build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
+      - uses: actions/checkout@v4
+      # Verifica que los archivos estén siendo generados en la carpeta reports
+      - name: List files in reports directory
+        run: ls -l src/main/resources/tests
+        
       - name: Run JMeter Action on a product test
         uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
-          testFilePath: src/main/resources/tests/product_tests.jmx
-          outputReportsFolder: reports/
-          args: "--loglevel INFO"
-
-      # Verifica que los archivos estén siendo generados en la carpeta reports
-      - name: List files in reports directory
-        run: ls -l reports/
+          testFilePath: ./src/main/resources/tests/product_tests.jmx
+          outputReportsFolder: ./src/main/resources/tests/reports/
+          args: "--loglevel INFO"      
 
       - uses: actions/upload-artifact@v4
         with:
