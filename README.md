@@ -18,5 +18,10 @@ Microservicio de gestión de productos desarrollado con Java 17, Spring Boot y G
 - Docker (opcional, para despliegue y pruebas locales)
 
 ## Configuración
-
 Configura la conexión a la base de datos en `src/main/resources/application.properties`:
+
+```properties
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=products
+spring.datasource.username=sa
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
