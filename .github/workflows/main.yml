@@ -35,7 +35,7 @@ jobs:
         run: k6-reporter resultado.json -o reporte.html
 
       - name: Upload HTML report artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: reporte-k6-html
           path: reporte.html
