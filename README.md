@@ -32,3 +32,4 @@ spring.jpa.show-sql=true
 - Clona el repositorio.
 - Configura la base de datos.
 - Ejecuta la aplicación:
+- La API estará disponible en http://localhost:8080/api/products.
