@@ -78,6 +78,6 @@ export default function () {
 // Generar reporte HTML automáticamente al final de la prueba
 export function handleSummary(data) {
     return {
-        'reporte-k6.html': htmlReport(data),
+        'reports/reporte-k6.html': htmlReport(data),
     };
 }
