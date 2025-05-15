@@ -82,6 +82,7 @@ export default function () {
     sleep(1); // Pausa entre iteraciones
 }
 
+
 // Generar reporte HTML automáticamente al final de la prueba
 export function handleSummary(data) {
     console.log('Generando el reporte HTML...');
