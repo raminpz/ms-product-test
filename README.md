@@ -33,3 +33,4 @@ spring.jpa.show-sql=true
 - Configura la base de datos.
 - Ejecuta la aplicación:
 - La API estará disponible en http://localhost:8080/api/products.
+- ./gradlew bootRun
