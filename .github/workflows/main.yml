@@ -1,5 +1,4 @@
 name: k6 Load Test
-
 on:
   push:
     branches:
@@ -23,7 +22,6 @@ jobs:
       - name: Run k6 script
         run: k6 run ./k6_crud.js
 
-      # List contents to check if report is generated
       - name: List directory contents
         run: ls -R
 
