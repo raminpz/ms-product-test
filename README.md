@@ -25,3 +25,10 @@ spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=products
 spring.datasource.username=sa
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+## Ejecución local
+- Clona el repositorio.
+- Configura la base de datos.
+- Ejecuta la aplicación:
