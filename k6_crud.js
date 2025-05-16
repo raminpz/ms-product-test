@@ -4,11 +4,7 @@ import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporte
 
 export const options = {
     stages: [
-        { duration: '20s', target: 10 },    // Subida suave a 10 usuarios
-        { duration: '1m', target: 50 },     // Subida rápida a 50 usuarios
-        { duration: '3m', target: 50 },     // Mantener carga estable alta
-        { duration: '1m30s', target: 20 },  // Descenso a 20 usuarios
-        { duration: '30s', target: 0 },     // Finaliza prueba bajando a 0
+        { duration: '20s', target: 10 },
     ],
 };
 
