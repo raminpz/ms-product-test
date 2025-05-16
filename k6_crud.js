@@ -83,6 +83,6 @@ export default function () {
 export function handleSummary(data) {
     console.log('Generando el reporte HTML...');
     return {
-        'reports/reporte-k6.html': htmlReport(data), // Guarda el reporte en 'reports/reporte-k6.html'
+        'reporte-k6.html': htmlReport(data), // Guarda el reporte en 'reports/reporte-k6.html'
     };
 }
