@@ -23,7 +23,7 @@ jobs:
 
       # List contents to check if report is generated
       - name: List directory contents
-        run: ls -R
+        run: ls
 
       - name: Upload HTML report artifact
         uses: actions/upload-artifact@v4
