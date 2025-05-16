@@ -22,7 +22,7 @@ jobs:
         run: docker pull openjdk:17-jdk-slim    
         
       - name: Docker compose up
-        run: docker-compose up &
+        run: docker compose up &
         
       - name: Setup k6
         uses: grafana/setup-k6-action@v1
