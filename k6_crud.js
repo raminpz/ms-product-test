@@ -15,7 +15,7 @@ export const options = {
 const BASE_URL = 'http://localhost:8080/api/products';
 
 const productsToPost = [
-    { name: 'Producto A', description: 'Descripción A', price: 10 },
+    { name: 'Producto A', description: 'Descripcion A', price: 10 },
 ];
 
 export default function () {
@@ -25,7 +25,7 @@ export default function () {
     let listRes = http.get(BASE_URL);
     check(listRes, {
         'listar productos status 200': (r) => r.status === 200,
-        'listar productos no vacío': (r) => Array.isArray(r.json()) && r.json().length >= 0,
+        'listar productos no vacio': (r) => Array.isArray(r.json()) && r.json().length >= 0,
     });
 
     // 2. Crear producto
@@ -52,7 +52,7 @@ export default function () {
     // 4. Actualizar producto
     const updateData = {
         name: `Producto k6 actualizado ${Math.floor(Math.random() * 1000)}`,
-        description: 'Descripción actualizada por k6',
+        description: 'Descripcion actualizada por k6',
         price: Math.floor(Math.random() * 100) + 1,
     };
     let updateRes = http.put(`${BASE_URL}/${productId}`, JSON.stringify(updateData), {
