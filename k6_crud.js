@@ -91,3 +91,4 @@ export function handleSummary(data) {
         'reporte-k6.html': htmlReport(data),
     };
 }
+
