@@ -12,7 +12,7 @@ export const options = {
     },
 };
 
-const BASE_URL = 'http://api:8080/api/products';  // Cambiado a nombre del servicio
+const BASE_URL = 'http://api:8080/api/products';
 
 const productsToPost = [
     { name: 'Producto A', description: 'Descripción A', price: 10 },
@@ -40,7 +40,7 @@ export default function () {
     });
 
     if (!createdOk) {
-        return; // Si no se creó el producto, no continuar con esta iteración
+        return;
     }
 
     // 3. Obtener producto
