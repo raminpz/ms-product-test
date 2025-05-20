@@ -3,8 +3,8 @@ import { check, sleep } from 'k6';
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 
 export const options = {
-    vus: 1,          // 1 usuario virtual concurrente
-    duration: '15s', // duración total del test
+    vus: 1,
+    duration: '15s',
     thresholds: {
         http_req_failed: ['rate<0.1'],
         http_req_duration: ['p(95)<500'],

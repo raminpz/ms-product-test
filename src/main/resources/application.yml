@@ -4,9 +4,14 @@ spring:
     username: sa
     password: Ram!123taty1012
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      maximum-pool-size: 10         # Aumenta el tamaño máximo del pool
+      minimum-idle: 5               # Mínimo conexiones inactivas
+      idle-timeout: 30000           # Tiempo en ms que una conexión puede estar inactiva antes de ser descartada (30 segundos)
+      connection-timeout: 30000     # Tiempo máximo en ms para esperar una conexión del pool (30 segundos)
+      max-lifetime: 1800000         # Vida máxima de una conexión en ms (30 minutos)
   jpa:
     database-platform: org.hibernate.dialect.SQLServerDialect
     hibernate:
       ddl-auto: update
     show-sql: true
-
