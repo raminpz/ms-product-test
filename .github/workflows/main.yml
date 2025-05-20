@@ -30,6 +30,12 @@ jobs:
       - name: Run k6 script
         run: k6 run ./k6_crud.js
 
+      - name: Show app container logs
+        run: |
+          docker ps
+          docker compose ps
+          docker compose logs api-1
+
       # List contents to check if report is generated
       - name: List directory contents
         run: ls
