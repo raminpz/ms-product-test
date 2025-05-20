@@ -12,7 +12,7 @@ export const options = {
     },
 };
 
-const BASE_URL = 'http://api:8080/api/products';
+const BASE_URL = 'http://localhost:8080/api/products';
 
 const productsToPost = [
     { name: 'Producto A', description: 'Descripción A', price: 10 },
