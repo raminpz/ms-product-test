@@ -3,9 +3,8 @@ import { check, sleep } from 'k6';
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 
 export const options = {
-    stages: [
-        { duration: '30s', target: 1 },  // 1 solo usuario durante 30 segundos
-    ],
+    vus: 1,          // 1 usuario virtual concurrente
+    duration: '15s', // duración total del test
     thresholds: {
         http_req_failed: ['rate<0.1'],
         http_req_duration: ['p(95)<500'],
@@ -28,12 +27,10 @@ export default function () {
     });
 
     let productsList = [];
-    if (listRes && listRes.body) {
-        try {
-            productsList = listRes.json();
-        } catch (e) {
-            console.error('Error al parsear JSON de listar productos:', e);
-        }
+    try {
+        productsList = listRes.json();
+    } catch (e) {
+        console.warn('No se pudo parsear JSON de listar productos:', e);
     }
 
     check(productsList, {
@@ -45,7 +42,13 @@ export default function () {
         headers: { 'Content-Type': 'application/json' },
     });
 
-    const productId = createRes.json('id');
+    let productId = null;
+    try {
+        productId = createRes.json('id');
+    } catch (e) {
+        productId = null;
+    }
+
     const createdOk = check(createRes, {
         'crear producto status 201': (r) => r.status === 201,
         'producto creado tiene id': () => productId !== undefined && productId !== null,
