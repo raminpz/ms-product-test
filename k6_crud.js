@@ -4,7 +4,10 @@ import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporte
 
 export const options = {
     stages: [
-        { duration: '10s', target: 5 },
+        { duration: '20s', target: 1 },  // 1 VU por 20 segundos
+        { duration: '20s', target: 2 },  // 2 VUs por 20 segundos
+        { duration: '20s', target: 3 },  // 3 VUs por 20 segundos
+        { duration: '10s', target: 0 },  // bajamos a 0 para finalizar suavemente
     ],
     thresholds: {
         http_req_failed: ['rate<0.1'],
