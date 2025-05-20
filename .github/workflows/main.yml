@@ -49,7 +49,7 @@ jobs:
         run: |
           docker ps
           docker compose ps
-          docker compose logs api-1
+          docker compose logs api
 
       # List contents to check if report is generated
       - name: List directory contents
