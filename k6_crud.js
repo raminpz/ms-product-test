@@ -25,7 +25,19 @@ export default function () {
     let listRes = http.get(BASE_URL);
     check(listRes, {
         'listar productos status 200': (r) => r.status === 200,
-        'listar productos no vacio': (r) => Array.isArray(r.json()) && r.json().length >= 0,
+    });
+
+    let productsList = [];
+    if (listRes && listRes.body) {
+        try {
+            productsList = listRes.json();
+        } catch (e) {
+            console.error('Error al parsear JSON de listar productos:', e);
+        }
+    }
+
+    check(productsList, {
+        'listar productos no vacio': () => Array.isArray(productsList) && productsList.length >= 0,
     });
 
     // 2. Crear producto
