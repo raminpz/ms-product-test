@@ -1,14 +1,15 @@
-# Usa una imagen base de OpenJDK para ejecutar el proyecto
 FROM openjdk:17-jdk-slim
-
-# Establece el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copia el archivo JAR desde el directorio target del proyecto a la imagen Docker
-COPY build/libs/ms-produc-test-0.0.1-SNAPSHOT.jar ms-product-test.jar
+# Instalar netcat para que wait-for-it.sh funcione
+RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
 
-# Expón el puerto 8080 en el contenedor
+# Copiar el archivo JAR y el script wait-for-it.sh
+COPY build/libs/ms-produc-test-0.0.1-SNAPSHOT.jar ms-product-test.jar
+COPY wait-for-it.sh wait-for-it.sh
+RUN chmod +x wait-for-it.sh
+
 EXPOSE 8080
 
-# Define el comando para ejecutar el archivo JAR
-ENTRYPOINT ["java", "-jar", "ms-product-test.jar"]
+# Ejecutar wait-for-it.sh para esperar a SQL Server y luego arrancar la app
+ENTRYPOINT ["./wait-for-it.sh", "sqlserver", "1433", "--", "java", "-jar", "ms-product-test.jar"]
