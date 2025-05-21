@@ -36,6 +36,9 @@ jobs:
       - name: Pull SlqSever
         run: docker pull mcr.microsoft.com/mssql/server:2019-latest
 
+      - name: Network
+        run: docker network create --driver bridge product-api-network
+
       - name: Docker compose server
         run: docker compose run sqlserver &
 
