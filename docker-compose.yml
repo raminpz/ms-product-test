@@ -7,9 +7,6 @@ services:
       DB_USERNAME: sa
       DB_PASSWORD: "Ram!123taty1012"
       DB_URL: jdbc:sqlserver://sqlserver:1433;databaseName=db_test;encrypt=false;trustServerCertificate=true
-    depends_on:
-      sqlserver:
-        condition: service_healthy
     networks:
       - product-api-network
 
@@ -21,8 +18,6 @@ services:
       MSSQL_PID: "Express"
     ports:
       - "1433:1433"
-    volumes:
-      - sqlserver-data:/var/opt/mssql
     networks:
       - product-api-network
     healthcheck:
@@ -30,10 +25,3 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
-networks:
-  product-api-network:
-    driver: bridge
-
-volumes:
-  sqlserver-data:
