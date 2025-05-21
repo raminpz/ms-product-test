@@ -1,23 +1,67 @@
-services:
-  api:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      DB_USERNAME: sa
-      DB_PASSWORD: "Ram!123taty1012"
-      DB_URL: jdbc:sqlserver://sqlserver:1433;databaseName=db_test;encrypt=false;trustServerCertificate=true
+name: k6 Load Test
 
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: "Ram!123taty1012"
-      MSSQL_PID: "Express"
-    ports:
-      - "1433:1433"
-    healthcheck:
-      test: [ "CMD-SHELL", "timeout 1 bash -c '</dev/tcp/localhost/1433' || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  k6-load-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Dar permiso de ejecución a gradlew
+        run: chmod +x ./gradlew
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Java app (sin tests)
+        run: ./gradlew build -x test
+
+      - name: Docker setup
+        uses: docker/setup-compose-action@v1
+
+      - name: Pull jdk
+        run: docker pull openjdk:17-jdk-slim
+
+      - name: Pull SlqSever
+        run: docker pull mcr.microsoft.com/mssql/server:2019-latest
+
+      - name: Docker compose up
+        run: docker compose up -d
+
+      - name: Esperar a que los servicios estén listos
+        run: sleep 10
+
+      - name: Curl
+        run: curl http://localhost:8080/api/products
+
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run k6 script
+        run: k6 run ./k6_crud.js
+
+      - name: Show app container logs
+        if: ${{always()}}
+        run: |
+          docker compose logs api
+
+      # List contents to check if report is generated
+      - name: List directory contents
+        run: ls
+
+      - name: Upload HTML report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-k6-html
+          path: ./reporte-k6.html
