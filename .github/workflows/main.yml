@@ -37,13 +37,13 @@ jobs:
         run: docker pull mcr.microsoft.com/mssql/server:2019-latest
 
       - name: Docker compose server
-        run: docker compose run sqlserver
+        run: docker compose run sqlserver &
 
       - name: Esperar a que los servicios estén listos
         run: sleep 10
 
       - name: Docker compose api
-        run: docker compose run api
+        run: docker compose run api &
 
       - name: Curl
         run: curl http://localhost:8080/api/products
