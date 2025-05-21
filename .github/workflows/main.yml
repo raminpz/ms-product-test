@@ -46,6 +46,7 @@ jobs:
         run: k6 run ./k6_crud.js
 
       - name: Show app container logs
+        if: ${{always()}}
         run: |
           docker ps
           docker compose ps
