@@ -7,8 +7,6 @@ services:
       DB_USERNAME: sa
       DB_PASSWORD: "Ram!123taty1012"
       DB_URL: jdbc:sqlserver://sqlserver:1433;databaseName=db_test;encrypt=false;trustServerCertificate=true
-    networks:
-      - product-api-network
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -18,8 +16,6 @@ services:
       MSSQL_PID: "Express"
     ports:
       - "1433:1433"
-    networks:
-      - product-api-network
     healthcheck:
       test: [ "CMD-SHELL", "timeout 1 bash -c '</dev/tcp/localhost/1433' || exit 1" ]
       interval: 10s
